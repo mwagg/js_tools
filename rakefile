@@ -1,0 +1,6 @@
+task :default => :specs
+
+desc "Runs the javascript unit tests"
+task :specs do
+   sh "jspec run --rhino" 
+end
