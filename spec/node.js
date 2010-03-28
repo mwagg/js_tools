@@ -5,6 +5,6 @@ require('unit/spec.helper')
 require('yourlib')
 
 JSpec
-  .exec('spec/unit/spec.js')
+  .exec('spec/unit/js_tools.spec.js')
   .run({ reporter: JSpec.reporters.Terminal, fixturePath: 'spec/fixtures', failuresOnly: true })
   .report()
