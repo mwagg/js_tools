@@ -3,12 +3,13 @@
 		<link type="text/css" rel="stylesheet" href="./lib/jspec.css" />
 		<script src="./lib/jspec.js"></script>
 		<script src="./lib/jspec.xhr.js"></script>
-		<script src="../lib/js_tools.js"></script>
+		<script src="../lib/string.format.js"></script>
 		<script src="unit/spec.helper.js"></script>
 		<script>
 			function runSuites() {
 				JSpec
-				.exec('unit/js_tools.spec.js')
+				.exec('unit/string.format.spec.js')
+				.exec('unit/eventhub.spec.js')
 				.run({ fixturePath: 'fixtures' })
 				.report()
 			}
