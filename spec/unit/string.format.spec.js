@@ -1,4 +1,4 @@
-JSpec.describe('.format', function() {
+JSpec.describe('string.format', function() {
     it('should return strings unchanged if they contain no tokens', function() {
         "hello world".format().should.equal("hello world");
     });
