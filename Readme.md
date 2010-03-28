@@ -1,7 +1,7 @@
 
 # js_tools 
 
-Description
+A collection of useful javascript functions and tools
 
 ## License 
 
