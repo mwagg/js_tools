@@ -4,12 +4,15 @@
 		<script src="./lib/jspec.js"></script>
 		<script src="./lib/jspec.xhr.js"></script>
 		<script src="../lib/string.format.js"></script>
+		<script src="../lib/eventhub.js"></script>
+		<script src="../lib/mock.js"></script>
 		<script src="unit/spec.helper.js"></script>
 		<script>
 			function runSuites() {
 				JSpec
 				.exec('unit/string.format.spec.js')
 				.exec('unit/eventhub.spec.js')
+				.exec('unit/mock.spec.js')
 				.run({ fixturePath: 'fixtures' })
 				.report()
 			}
