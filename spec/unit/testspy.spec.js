@@ -21,7 +21,7 @@ describe('TestSpy', function() {
         });
 
         describe('when asserting a method was called', function() {
-            before_each(function(){
+            before_each(function() {
                testSpy.returns('bar').when('foo').is_called();
             });
 
@@ -34,6 +34,21 @@ describe('TestSpy', function() {
 
                 (function() { testSpy.assert_was_called('foo'); }).should_not.throw_error();
             });
-        })
+        });
+
+        describe('when asserting a method was not called', function() {
+            before_each(function() {
+                testSpy.returns('bar').when('foo').is_called();
+            });
+
+            it('should throw an error if the method was called', function() {
+                testSpy.foo();
+                (function() { testSpy.assert_was_not_called('foo'); }).should.throw_error("Expected method 'foo' to not be called but it was.");
+            });
+
+            it('should not throw an error if the method was not called', function() {
+                (function() { testSpy.assert_was_not_called('foo'); }).should_not.throw_error();
+            });
+        });
     });
 });
