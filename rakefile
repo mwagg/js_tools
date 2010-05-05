@@ -1,5 +1,6 @@
 require 'rake/clean'
 
+include_artifacts = false
 task :default => :specs
 
 CLEAN.include 'artifacts'
@@ -9,7 +10,17 @@ task :create_artifacts_folder => :clean do
   mkdir 'artifacts'
 end
 
+task :with_artifacts => [:clean, :create_artifacts_folder] do
+  include_artifacts = true
+end
+
 desc "Runs the javascript unit tests"
 task :specs => :create_artifacts_folder do
-   sh "jspec run --rhino > artifacts/jspec" 
+   command = "jspec run --rhino"
+
+   if (include_artifacts)
+    command += "> artifacts/jspec"
+   end
+
+   sh command
 end
