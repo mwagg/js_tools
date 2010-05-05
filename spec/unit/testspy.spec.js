@@ -5,7 +5,7 @@ describe('TestSpy', function() {
         };
     }
 
-    describe('when creating a test spy for an object created by a function', function() {
+    describe('when creating a test spy for an object created by a constructor', function() {
         var testSpy;
 
         before_each(function() {
@@ -13,16 +13,16 @@ describe('TestSpy', function() {
         });
 
         it('should be possible to stub an existing method', function() {
-            testSpy.returns('bar').when('foo').is_called();
+            testSpy.stub('foo').and_return('bar');
 
             var returnedValue = testSpy.foo();
 
             returnedValue.should.equal('bar');
         });
 
-        describe('when asserting a method was called', function() {
+        describe('and asserting a method was called', function() {
             before_each(function() {
-               testSpy.returns('bar').when('foo').is_called();
+               testSpy.stub('foo').and_return('bar');
             });
 
             it('should throw an error if the method was not called', function() {
@@ -36,9 +36,9 @@ describe('TestSpy', function() {
             });
         });
 
-        describe('when asserting a method was not called', function() {
+        describe('and asserting a method was not called', function() {
             before_each(function() {
-                testSpy.returns('bar').when('foo').is_called();
+               testSpy.stub('foo').and_return('bar');
             });
 
             it('should throw an error if the method was called', function() {
