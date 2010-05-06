@@ -3,6 +3,10 @@ describe('TestSpy', function() {
         this.foo = function() {
             return 'foo';
         };
+
+        this.mike = function() {
+
+        };
     }
 
     describe('when creating a test spy for an object created by a constructor', function() {
@@ -21,10 +25,6 @@ describe('TestSpy', function() {
         });
 
         describe('and asserting a method was called', function() {
-            before_each(function() {
-               testSpy.stub('foo').and_return('bar');
-            });
-
             it('should throw an error if the method was not called', function() {
                 (function() { testSpy.assert_was_called('foo'); }).should.throw_error("Expected method 'foo' to be called but it wasn't.");
             });
