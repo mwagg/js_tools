@@ -1,0 +1,2 @@
+Be able to create a stub without supplying an object
+Be able to stub JSON objects
