@@ -12,7 +12,7 @@ describe('TestSpy', function() {
             testSpy = new TestSpy(TestObjectFunction);
         });
 
-        it('should be possible to stub an existing method', function() {
+        it('should be possible to stub the return value of an existing method', function() {
             testSpy.stub('foo').and_return('bar');
 
             var returnedValue = testSpy.foo();
