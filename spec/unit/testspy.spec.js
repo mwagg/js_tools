@@ -26,28 +26,41 @@ describe('TestSpy', function() {
 
         describe('and asserting a method was called', function() {
             it('should throw an error if the method was not called', function() {
-                (function() { testSpy.assert_was_called('foo'); }).should.throw_error("Expected method 'foo' to be called but it wasn't.");
+                var action = function() {
+                    testSpy.assert_was_called('foo');
+                };
+                action.should.throw_error("Expected method 'foo' to be called but it wasn't.");
             });
 
             it('should not throw an error if the method was called', function() {
                 testSpy.foo();
 
-                (function() { testSpy.assert_was_called('foo'); }).should_not.throw_error();
+                var action = function() {
+                    testSpy.assert_was_called('foo');
+                };
+                action.should_not.throw_error();
             });
         });
 
         describe('and asserting a method was not called', function() {
             before_each(function() {
-               testSpy.stub('foo').and_return('bar');
+                testSpy.stub('foo').and_return('bar');
             });
 
             it('should throw an error if the method was called', function() {
                 testSpy.foo();
-                (function() { testSpy.assert_was_not_called('foo'); }).should.throw_error("Expected method 'foo' to not be called but it was.");
+
+                var action = function() {
+                    testSpy.assert_was_not_called('foo');
+                };
+                action.should.throw_error("Expected method 'foo' to not be called but it was.");
             });
 
             it('should not throw an error if the method was not called', function() {
-                (function() { testSpy.assert_was_not_called('foo'); }).should_not.throw_error();
+                var action = function() {
+                    testSpy.assert_was_not_called('foo');
+                };
+                action.should_not.throw_error();
             });
         });
     });
