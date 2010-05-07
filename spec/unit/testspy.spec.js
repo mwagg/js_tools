@@ -63,5 +63,29 @@ describe('TestSpy', function() {
                 action.should_not.throw_error();
             });
         });
+
+        describe('and asserting a method was called a specific number of times', function() {
+            it('should throw an error if the method was called an incorrect number of times', function() {
+                testSpy.foo();
+                testSpy.foo();
+
+                var action = function() {
+                    testSpy.assert_was_called('foo').with_call_count(3)
+                };
+
+                action.should.throw_error("Expected method 'foo' to be called 3 times but it was called 2 times.");
+            });
+
+            it('should not throw an error if the method was called the correct number of times', function() {
+                testSpy.foo();
+                testSpy.foo();
+
+                var action = function() {
+                    testSpy.assert_was_called('foo').with_call_count(2)
+                };
+
+                action.should_not.throw_error();
+            });
+        });
     });
 });
