@@ -5,13 +5,24 @@ describe('TestSpy', function() {
         };
     }
 
-    TestObjectFunction.prototype.bar = function() {};
+    TestObjectFunction.prototype.bar = function() {
+    };
 
     describe('when creating a test spy for an object created by a constructor', function() {
         var testSpy;
 
         before_each(function() {
             testSpy = new TestSpy(TestObjectFunction);
+        });
+
+        it('should be possible to assert a method defined on the objects prototype was called', function() {
+            testSpy.bar();
+
+            var action = function() {
+                testSpy.assert_was_called('bar');
+            };
+
+            action.should_not.throw_error();
         });
 
         it('should be possible to stub the return value of methods defined on the objects prototype', function() {
