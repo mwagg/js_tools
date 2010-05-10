@@ -23,7 +23,7 @@ describe('TestSpy', function() {
             testSpy.someValue.should.equal(10);
         });
 
-        it('should not be possible to stub a method that does not exists on the object', function() {
+        it('should not be possible to stub a method that does not exist on the object', function() {
             var action = function() {
                 testSpy.stub('iDoNotExist').and_return(5);
             };
