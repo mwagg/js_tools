@@ -9,11 +9,19 @@ describe('TestSpy', function() {
         };
     }
 
+    TestObjectFunction.prototype.bar = function() {};
+
     describe('when creating a test spy for an object created by a constructor', function() {
         var testSpy;
 
         before_each(function() {
             testSpy = new TestSpy(TestObjectFunction);
+        });
+
+        it('should be possible to stub the return value of methods defined on the objects prototype', function() {
+            testSpy.stub('bar').and_return('foo');
+
+            testSpy.bar().should.equal('foo');
         });
 
         it('should be possible to stub the return value of an existing method', function() {
