@@ -3,15 +3,24 @@ describe('TestSpy', function() {
         this.foo = function() {
             return 'foo';
         };
+
+        this.someValue = 5;
     }
 
-    TestObjectFunction.prototype.bar = function() {};
+    TestObjectFunction.prototype.bar = function() {
+    };
 
     describe('when creating a test spy for an object created by a constructor', function() {
         var testSpy;
 
         before_each(function() {
             testSpy = new TestSpy(TestObjectFunction);
+        });
+
+        it('should be possible to stub the value of an attribute', function() {
+            testSpy.stub('someValue').and_return(10);
+
+            testSpy.someValue.should.equal(10);
         });
 
         it('should be possible to stub the return value of methods defined on the objects prototype', function() {
