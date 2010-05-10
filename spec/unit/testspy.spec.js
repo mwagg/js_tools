@@ -3,10 +3,6 @@ describe('TestSpy', function() {
         this.foo = function() {
             return 'foo';
         };
-
-        this.mike = function() {
-
-        };
     }
 
     TestObjectFunction.prototype.bar = function() {};
