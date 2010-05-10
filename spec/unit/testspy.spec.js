@@ -23,6 +23,16 @@ describe('TestSpy', function() {
             testSpy.someValue.should.equal(10);
         });
 
+        it('should be possible to assert a method defined on the objects prototype was called', function() {
+            testSpy.bar();
+
+            var action = function() {
+                testSpy.assert_was_called('bar');
+            };
+
+            action.should_not.throw_error();
+        });
+
         it('should be possible to stub the return value of methods defined on the objects prototype', function() {
             testSpy.stub('bar').and_return('foo');
 
