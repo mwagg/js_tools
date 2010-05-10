@@ -23,6 +23,14 @@ describe('TestSpy', function() {
             testSpy.someValue.should.equal(10);
         });
 
+        it('should not be possible to stub a method that does not exists on the object', function() {
+            var action = function() {
+                testSpy.stub('iDoNotExist').and_return(5);
+            };
+
+            action.should.throw_error("Cannot stub method 'iDoNotExist' as it is not defined.");
+        });
+
         it('should be possible to assert a method defined on the objects prototype was called', function() {
             testSpy.bar();
 
