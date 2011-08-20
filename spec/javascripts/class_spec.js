@@ -74,9 +74,6 @@ describe("Class", function() {
     var theMixin = {
       someProperty : 5,
       someFunc : function() { return "You got the func!"; },
-      funcWhichReturnsThis : function() {
-        return this;
-      }
     };
 
     beforeEach(function() {
@@ -101,9 +98,6 @@ describe("Class", function() {
     var theMixin = {
       someProperty : 5,
       someFunc : function() { return "You got the func!"; },
-      funcWhichReturnsThis : function() {
-        return this;
-      }
     };
 
     beforeEach(function() {
@@ -112,12 +106,33 @@ describe("Class", function() {
       instance.include(theMixin);
     });
 
-    it("should add the properties to any instance which is created", function() {
+    it("should add the properties to the instance", function() {
       expect(instance.someProperty).toBe(theMixin.someProperty);
     });
 
-    it("should add the methods to any instance which is created", function() {
+    it("should add the methods to the instance", function() {
       expect(instance.someFunc()).toBe(theMixin.someFunc());
+    });
+  });
+
+  describe("when extending a class with a mixin", function() {
+    var MyClass;
+    var theMixin = {
+      someProperty : 5,
+      someFunc : function() { return "You got the func!"; },
+    };
+
+    beforeEach(function() {
+      MyClass = Class();
+      MyClass.extend(theMixin);
+    });
+
+    it("should add the properties to the class", function() {
+      expect(MyClass.someProperty).toBe(theMixin.someProperty);
+    });
+
+    it("should add the methods to the class", function() {
+      expect(MyClass.someFunc()).toBe(theMixin.someFunc());
     });
   });
 });
