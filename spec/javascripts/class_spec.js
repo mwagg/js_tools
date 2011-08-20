@@ -6,6 +6,14 @@ describe("Class", function() {
     expect(instance).not.toBeNull();
   });
 
+  it("should save me if I am stupid and forget to use new", function() {
+    var MyClass = Class({ someProp : 5 });
+    var instance = MyClass();
+
+    expect(window.someProp).toBeUndefined();
+    expect(instance).toBeDefined();
+  });
+
   describe("when a prototype is passed", function() {
     var MyClass;
     var instance;
