@@ -19,16 +19,16 @@ describe("Class", function() {
     var instance;
     var thePrototype = {
       someProperty : 5,
-      someFunc : function() { return "You got the func!"; },
-      funcWhichReturnsThis : function() {
-        return this;
-      }
+    someFunc : function() { return "You got the func!"; },
+    funcWhichReturnsThis : function() {
+      return this;
+    }
     };
 
     beforeEach(function() {
       MyClass = Class(thePrototype);
     });
-    
+
     it("should add the properties", function() {
       var instance = new MyClass();
       expect(instance.someProperty).toBe(thePrototype.someProperty);
@@ -66,6 +66,33 @@ describe("Class", function() {
 
         expect(invocationThis).toBe(instance);
       })
+    });
+  });
+
+  describe("when including a mixin to the class", function() {
+    var MyClass;
+    var instance;
+    var theMixin = {
+      someProperty : 5,
+      someFunc : function() { return "You got the func!"; },
+      funcWhichReturnsThis : function() {
+        return this;
+      }
+    };
+
+    beforeEach(function() {
+      MyClass = Class();
+      MyClass.include(theMixin);
+    });
+
+    it("should add the properties to any instance which is created", function() {
+      var instance = new MyClass();
+      expect(instance.someProperty).toBe(theMixin.someProperty);
+    });
+
+    it("should add the methods to any instance which is created", function() {
+      var instance = new MyClass();
+      expect(instance.someFunc()).toBe(theMixin.someFunc());
     });
   });
 });
