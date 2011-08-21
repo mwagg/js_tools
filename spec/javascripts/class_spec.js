@@ -19,10 +19,10 @@ describe("Class", function() {
     var instance;
     var thePrototype = {
       someProperty : 5,
-    someFunc : function() { return "You got the func!"; },
-    funcWhichReturnsThis : function() {
-      return this;
-    }
+      someFunc : function() { return "You got the func!"; },
+      funcWhichReturnsThis : function() {
+        return this;
+      }
     };
 
     beforeEach(function() {
@@ -78,17 +78,35 @@ describe("Class", function() {
 
     beforeEach(function() {
       MyClass = Class();
-      MyClass.include(theMixin);
     });
 
     it("should add the properties to any instance which is created", function() {
+      MyClass.include(theMixin);
       var instance = new MyClass();
       expect(instance.someProperty).toBe(theMixin.someProperty);
     });
 
     it("should add the methods to any instance which is created", function() {
+      MyClass.include(theMixin);
       var instance = new MyClass();
       expect(instance.someFunc()).toBe(theMixin.someFunc());
+    });
+
+    describe("when the mixin has an included method", function() {
+      beforeEach(function() {
+        theMixin.included = jasmine.createSpy("the include method");
+        MyClass.include(theMixin);
+      });
+
+      it("should not be copied to the instance", function() {
+        var instance = new MyClass();
+        expect(instance.included).not.toBeDefined();
+      });
+
+      it("should call the included method when creating an instance", function() {
+        new MyClass();
+        expect(theMixin.included).toHaveBeenCalled();
+      });
     });
   });
 
@@ -103,15 +121,31 @@ describe("Class", function() {
     beforeEach(function() {
       MyClass = Class();
       instance = new MyClass();
-      instance.include(theMixin);
     });
 
     it("should add the properties to the instance", function() {
+      instance.include(theMixin);
       expect(instance.someProperty).toBe(theMixin.someProperty);
     });
 
     it("should add the methods to the instance", function() {
+      instance.include(theMixin);
       expect(instance.someFunc()).toBe(theMixin.someFunc());
+    });
+
+    describe("when the mixin has an included method", function() {
+      beforeEach(function() {
+        theMixin.included = jasmine.createSpy("the include method");
+        instance.include(theMixin);
+      });
+
+      it("should not be copied to the instance", function() {
+        expect(instance.included).not.toBeDefined();
+      });
+
+      it("should call the included method when creating an instance", function() {
+        expect(theMixin.included).toHaveBeenCalled();
+      });
     });
   });
 
