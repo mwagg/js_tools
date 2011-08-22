@@ -107,6 +107,28 @@ describe("Class", function() {
         new MyClass();
         expect(theMixin.included).toHaveBeenCalled();
       });
+
+      it("should be called after the constructor", function() {
+        var constructorCalled = false;
+
+        var ClassWithConstructor = Class({
+          initialize : function() {
+            constructorCalled = true;
+          }
+        });
+
+        var Mixin = {
+          included : function() {
+            if (!constructorCalled) {
+              throw "Constructor has not been called!";
+            }
+          }
+        };
+
+        ClassWithConstructor.include(Mixin);
+
+        new ClassWithConstructor();
+      });
     });
   });
 
