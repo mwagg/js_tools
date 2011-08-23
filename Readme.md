@@ -7,7 +7,7 @@ A collection of useful javascript functions and tools
 
 (The MIT License)
 
-Copyright (c) 2009 Your Name &lt;Your Email&gt;
+Copyright (c) 2011 Mike Wagg &lt;michael@guerillatactics.co.uk&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
